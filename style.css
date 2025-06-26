@@ -1,0 +1,9 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Estilos para a dropzone */
+#dropzone.dragover {
+    border-color: #3b82f6; /* blue-500 */
+    background-color: #eff6ff; /* blue-50 */
+}

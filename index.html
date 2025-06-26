@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TextLogFilter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <main class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-6 md:p-8 space-y-8">
+        
+        <header class="text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">TextLogFilter</h1>
+            <p class="text-gray-600 mt-2">Uma ferramenta simples para filtrar linhas em arquivos de texto.</p>
+        </header>
+
+        <section id="input-section">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">1. Configuração</h2>
+            <div class="space-y-6">
+                <div id="dropzone" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-colors duration-200">
+                    <label for="filePathInput" class="block text-sm font-medium text-gray-700 mb-2">Arraste e solte o arquivo de log aqui ou clique para selecionar (.txt, .log)</label>
+                    <input type="file" id="filePathInput" accept=".txt, .log" class="hidden"/>
+                    <span id="fileNameDisplay" class="text-blue-700 font-semibold">Nenhum arquivo selecionado</span>
+                </div>
+                <div>
+                    <label for="keywordInput" class="block text-sm font-medium text-gray-700 mb-1">Palavra(s)-chave para filtrar (separadas por vírgula)</label>
+                    <input type="text" id="keywordInput" placeholder="Ex: ERROR, WARNING, INFO, ETC" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out">
+                    <p id="keywordError" class="text-red-500 text-sm mt-1 hidden">Por favor, insira pelo menos uma palavra-chave válida.</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <input type="checkbox" id="caseSensitiveCheckbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    <label for="caseSensitiveCheckbox" class="text-sm font-medium text-gray-700">Diferenciar maiúsculas/minúsculas</label>
+                </div>
+                <div>
+                    <label for="outputFileName" class="block text-sm font-medium text-gray-700 mb-1">Nome do arquivo de saída sugerido</label>
+                    <input type="text" id="outputFileName" disabled class="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-500 cursor-not-allowed">
+                </div>
+            </div>
+        </section>
+
+        <section id="action-section">
+            <button id="processButton" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105">
+                Processar Arquivo
+            </button>
+            <div id="progressBarContainer" class="hidden w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+        </section>
+
+        <section id="output-section" class="space-y-4">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2 border-b pb-2">2. Resultado</h2>
+            <div id="messageArea" class="text-center p-3 rounded-lg text-sm font-medium min-h-[44px]" role="status" aria-live="polite"></div>
+            
+            <div id="downloadArea" class="hidden text-center">
+                <a id="downloadLink" href="#" download class="inline-block bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105">
+                    Baixar Arquivo Filtrado
+                </a>
+            </div>
+
+            <div>
+                <label for="filteredContent" class="block text-sm font-medium text-gray-700 mb-1">Conteúdo Filtrado (para visualização)</label>
+                <textarea id="filteredContent" rows="12" readonly class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 font-mono text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"></textarea>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
